@@ -2,7 +2,7 @@
 
 ## Sobre
 
-Este projeto contém uma ferramenta em HTML para simular e testar as escolhas de tópicos e subtópicos em um formulário dinâmico, usada principalmente para simular *speedruns* sem a necessidade de testar diretamente no **SAD** (*Simulator and Analyzer for Decisions*).
+Este projeto contém uma ferramenta em HTML para simular e testar as escolhas de tópicos e subtópicos em um formulário dinâmico, usada principalmente para simular *speedruns* sem a necessidade de testar diretamente no **SAD**.
 
 ### Objetivo
 
@@ -17,9 +17,9 @@ O **Sadinho Simulator** funciona como um **substituto** (ou "surrogate") do SAD,
 
 ## Download
 
-Para testar a versão mais recente do **Sadinho Simulator**, acesse o HTML diretamente no GitHub:
+Para testar a versão mais recente, faça o download direto:
 
-[Baixar Sadinho Simulator 3160](https://github.com/Elielzices/EA-SAD-Tools/blob/f4d89705d3766fcdb3689db9e74e3b169fde746a/Sadinho%20Simulator/Sadinho%20simulator%203160.html)
+[Baixar Sadinho Simulator 3160](https://raw.githubusercontent.com/Elielzices/EA-SAD-Tools/f4d89705d3766fcdb3689db9e74e3b169fde746a/Sadinho%20Simulator/Sadinho%20simulator%203160.html)
 
 ## Instruções de uso
 
