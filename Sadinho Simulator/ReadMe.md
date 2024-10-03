@@ -19,7 +19,7 @@ O **Sadinho Simulator** funciona como um **substituto** (ou "surrogate") do SAD,
 
 Para testar a versão mais recente, faça o download direto:
 
-[Baixar Sadinho Simulator 3160](https://raw.githubusercontent.com/Elielzices/EA-SAD-Tools/f4d89705d3766fcdb3689db9e74e3b169fde746a/Sadinho%20Simulator/Sadinho%20simulator%203160.html)
+[Baixar Sadinho Simulator 3160](https://raw.githubusercontent.com/Elielzices/EA-SAD-Tools/refs/heads/main/Sadinho%20Simulator/Sadinho%20simulator%203160.html?token=GHSAT0AAAAAACYMKI3UMJ25JQ674RDBMCD6ZX6DKHQ)
 
 ## Instruções de uso
 
