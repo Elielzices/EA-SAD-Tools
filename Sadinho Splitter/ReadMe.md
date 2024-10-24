@@ -2,6 +2,13 @@
 
 Este script automatiza o processo de extração de boletins de alunos a partir de um arquivo PDF contendo múltiplos boletins. Cada boletim é separado e salvo como um arquivo PDF individual, organizado por turma. Logs com informações dos alunos e a estrutura de páginas são gerados automaticamente em formato CSV.
 
+## Download
+
+Para testar a versão mais recente, faça o download direto:
+
+[Splitter Sadinho Results 1.0](https://github.com/Elielzices/EA-SAD-Tools/releases/download/SplitterSadinho/SplitterSadinhoResults-1.0.exe)
+
+
 ## Requisitos
 
 - Python 3.x
