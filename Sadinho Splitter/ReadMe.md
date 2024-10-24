@@ -1,4 +1,4 @@
-# Boletim Splitter
+# Sadinho Splitter
 
 Este script automatiza o processo de extração de boletins de alunos a partir de um arquivo PDF contendo múltiplos boletins. Cada boletim é separado e salvo como um arquivo PDF individual, organizado por turma. Logs com informações dos alunos e a estrutura de páginas são gerados automaticamente em formato CSV.
 
@@ -33,7 +33,7 @@ sudo apt-get install python3-tk
    Execute o script Python para iniciar o processo de extração e organização dos boletins.
 
 ```bash
-python boletim_splitter.py
+SplitterSadinhoResults-1.0.py
 ```
 
 3. **Passos Interativos**:
