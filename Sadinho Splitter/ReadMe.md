@@ -7,6 +7,7 @@ Este script automatiza o processo de extração de boletins de alunos a partir d
 Para usar a versão mais recente, faça o download direto:
 
 [Splitter Sadinho Results 1.0 (EXE)](https://github.com/Elielzices/EA-SAD-Tools/releases/download/SplitterSadinho/SplitterSadinhoResults-1.0.exe)
+
 [Splitter Sadinho Results 1.0 (PYTHON)](https://github.com/Elielzices/EA-SAD-Tools/releases/download/SplitterSadinho/SplitterSadinhoResults-1.0.py)
 
 ## Requisitos
