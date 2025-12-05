@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test Window</title>
+    <style type="text/css">
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      ul {
+        list-style: none;
+        margin-left: 20px;
+        padding-left: 0;
+      }
+      li {
+        margin: 10px 0;
+        padding: 0;
+      }
+      input[type="radio"] {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Test Window</h1>
+    <form id="myForm">
+      <ul id="topicsList"></ul>
+      <button type="button" id="refreshButton">Refresh</button>
+      <button type="submit">Submit</button>
+      <button type="button" id="copyToSpeedrunButton">Copy to speedrun</button>
+    </form>
+    <script type="text/javascript">
+      // Prompt the user for the number of topics
+      var numTopics = parseInt(prompt("How many topics would you like to generate?"));
+      
+      // Generate the form elements for each topic
+      var topicsList = document.getElementById("topicsList");
+      for (var i = 1; i <= numTopics; i++) {
+        var topicItem = document.createElement("li");
+        topicItem.textContent = `Topic ${i}`;
+        var subtopicsList = document.createElement("ul");
+        for (var j = 1; j <= 5; j++) {
+          var subtopicItem = document.createElement("li");
+          var subtopicInput = document.createElement("input");
+          subtopicInput.type = "radio";
+          subtopicInput.name = `topic${i}`;
+          subtopicInput.value = `${i}.${j}`;
+          subtopicItem.appendChild(subtopicInput);
+          subtopicItem.appendChild(document.createTextNode(`Reach ${i}.${j}`));
+          subtopicsList.appendChild(subtopicItem);
+        }
+        topicItem.appendChild(subtopicsList);
+        topicsList.appendChild(topicItem);
+      }
+      
+      // Add an event listener for the submit button
+      document.getElementById("myForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        var text = "";
+        for (var i = 1; i <= numTopics; i++) {
+          var topicValue = document.querySelector(`input[name=topic${i}]:checked`);
+          if (topicValue) {
+            text += `Topic ${i}: ${topicValue.value}\n`;
+          } else {
+            text += `Topic ${i}: [inactive]\n`;
+          }
+        }
+        
+        navigator.clipboard.writeText(text).then(function() {
+          // Show the submit output in the alert box
+          alert(`Copied to clipboard!\n\n${text}`);
+        }, function() {
+          alert("Error copying to clipboard");
+        });
+      });
+      
+      // Add an event listener for the refresh button
+      document.getElementById("refreshButton").addEventListener("click", function() {
+        // Clear all radio button selections
+        var radioButtons = document.querySelectorAll("input[type=radio]");
+        for (var i = 0; i < radioButtons.length; i++) {
+          radioButtons[i].checked = false;
+        }
+      });
+      
+      // Add an event listener for the "Copy to speedrun" button
+      document.getElementById("copyToSpeedrunButton").addEventListener("click", function() {
+        var text = "";
+        for (var i = 1; i <= numTopics; i++) {
+          var topicValue = document.querySelector(`input[name=topic${i}]:checked`);
+          if (topicValue) {
+            // Only output the subtopic number
+            text += `${topicValue.value.split(".")[1]}\t`;
+          } else {
+            // Output an empty line for inactive topics
+            text += `\t`;
+          }
+        }
+        
+		  // Remove o último caractere de tabulação
+		  text = text.trimEnd();
+		
+        navigator.clipboard.writeText(text).then(function() {
+          // Show the submit output in the alert box
+          alert(`Copied to speedrun!\n\n${text}`);
+        }, function() {
+          alert("Error copying to clipboard");
+        });
+      });
+    </script>
+  </body>
+</html>

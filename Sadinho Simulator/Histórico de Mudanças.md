@@ -2,6 +2,20 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [3170] - 2025-12-04
+
+### Adicionado
+- Adição do **prompt de input para Reaches por tópico**.
+
+---
+
+## [3165] - 2025-04-14
+
+### Alterado
+- 5 subtópicos ao invés de 3, visto a mudança no SAD Boletim Infantil.
+
+---
+
 ## [3160] - 2024-10-03
 ### Adicionado
 - Atualização no botão **"Copy to speedrun"** para utilizar tabulação (`\t`) como separador, otimizando para exportação.
@@ -91,7 +105,7 @@ Aqui está uma linha do tempo completa das versões do projeto com detalhes das 
 
 ---
 
-### **Versão 3160 (Atual)**
+### **Versão 3160**
 - **Data de lançamento**: quinta-feira, 3 de outubro de 2024, 00:04:12
 - **Período ativa**: (Versão atual)
 - **Resumo**: Agora, as corridas malucas do *speedrun* vão ficar ainda mais eficientes com tabulações em vez de novas linhas! 💨
@@ -103,9 +117,38 @@ Aqui está uma linha do tempo completa das versões do projeto com detalhes das 
 
 ---
 
+### **Versão 3165**
+- **Data de lançamento**: terça-feira, 14 de abril de 2025, 16:24
+- **Período ativa**: 7 meses, 20 dias, 6 horas e 1 minuto
+- **Resumo**: Ajuste na quantidade de subtópicos por tópico, alinhando o simulador com as mudanças do **SAD Boletim Infantil**.
+- **Simulação**: Geração dinâmica de tópicos com **5 subtópicos** em vez de 3, permitindo maior fidelidade às estruturas do SAD.
+- **Funcionalidades**:
+  - **Alterado**: Cada tópico agora contém 5 subtópicos, em vez de 3.
+  - Botões **"Refresh"** e **"Copy to speedrun"** continuam funcionando como nas versões anteriores.
+  - **Formatação de cópia**: tabulação usada para separar os subtópicos selecionados.
+  - **Fallback para tópicos inativos**: se nenhum subtópico for selecionado, o sistema marca `[inactive]`.
+
+---
+
+### **Versão 3170 (Atual)**
+- **Data de lançamento**: quinta-feira, 4 de dezembro de 2025, 22:27
+- **Período ativa**: Atual
+- **Resumo**: Adição do **prompt para definir o número de reaches (subtópicos) por tópico**, permitindo que cada simulação tenha uma quantidade customizável de níveis por tópico.
+- **Simulação**: O usuário agora define **quantos tópicos** e **quantos reaches (níveis) por tópico** deseja gerar, tornando o simulador ainda mais flexível e próximo da realidade do SAD.
+- **Funcionalidades**:
+  - **Adicionado**: Prompt de input para definir a quantidade de reaches por tópico.
+  - Funcionalidades de versões anteriores mantidas:
+    - **Botão "Refresh"** para limpar todas as seleções.
+    - **Botão "Copy to speedrun"** para copiar os níveis selecionados, separados por tabulação.
+    - **Formatação de cópia**: tabulação usada para separar os subtópicos selecionados.
+    - **Fallback para tópicos inativos**: se nenhum subtópico for selecionado, o sistema marca `[inactive]`.
+
+---
 ### Resumo dos tempos de "reinado":
 1. **Versão 1.0**: 11 horas, 13 minutos e 38 segundos
 2. **Versão 2.0**: 1 hora, 57 minutos e 35 segundos
 3. **Versão 3000**: 33 dias, 17 horas, 29 minutos e 43 segundos
 4. **Versão 3155**: 1 ano, 4 meses, 3 dias, 4 horas, 22 minutos e 55 segundos
-5. **Versão 3160**: Atual
+5. **Versão 3160**: 6m 11d 16h 20min  
+6. **Versão 3165**: 7m 20d 6h 1min  
+7. **Versão 3170**: Atual
