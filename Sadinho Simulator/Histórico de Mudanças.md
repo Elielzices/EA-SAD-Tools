@@ -2,6 +2,11 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [Sadinho Simulator 4.01] - 2025-12-07
+
+### Correção:
+- O botão *Submit*, agora funciona corretamente, colocando um tópico abaixo do outro.
+
 ## [Sadinho Simulator 4.0] - 2025-12-07
 
 ### Adicionado
@@ -174,6 +179,8 @@ Aqui está uma linha do tempo completa das versões do projeto com detalhes das 
     - **Botão "Copy to speedrun"** para copiar os níveis na página do aluno, separados por tabulação.
     - **Formatação de cópia**: tabulação usada para separar os subtópicos selecionados.
 
+#### Correção 4.01: (domingo, 7 de dezembro de 2025, 16:56)
+- O botão *Submit*, agora funciona corretamente, colocando um tópico abaixo do outro.
 
 ---
 
@@ -185,4 +192,5 @@ Aqui está uma linha do tempo completa das versões do projeto com detalhes das 
 5. **Versão 3160**: 6m 11d 16h 20min  
 6. **Versão 3165**: 7m 20d 6h 1min  
 7. **Versão 3170**: 2 dias, 17 horas e 9 minutos
-8. **Versão 4.0**: Atual
+8. **Versão 4.0**: 1 hora e 20 minutos
+9. **Versão 4.01**: Atual

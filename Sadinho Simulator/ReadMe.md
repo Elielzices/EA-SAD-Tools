@@ -1,4 +1,4 @@
-# Sadinho Simulator 4.0
+# Sadinho Simulator 4.01
 
 ## Sobre
 
@@ -19,6 +19,10 @@ O **Sadinho Simulator** funciona como um **substituto** (ou "surrogate") do SAD,
 - **[NOVIDADE!!!] Novo botão "Copy all as table"**: copia os dados de toda a turma em uma tabela separada por tabulações, pronta para planilhas ou outras simulações.
 - **Fallback para tópicos inativos**: se nenhum subtópico for selecionado, o sistema marca `[inactive]`.
 - **Interface multilíngue**: alterna entre inglês e português, com bandeirinhas PNG representando cada idioma.
+
+## Correções
+
+- O botão *Submit*, agora funciona corretamente, colocando um tópico abaixo do outro.
 
 ## Download
 

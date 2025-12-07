@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sadinho Simulator 4.01</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f2f2f2; }
+.topbar { background: #fff; padding: 10px; display: flex; align-items: center; gap: 15px; border-bottom: 2px solid #BAD0F7; }
+.topbar input { width: 60px; }
+.container { display: flex; width: 100%; height: calc(100vh - 60px); }
+.left-panel { width: 250px; background: #fff; overflow-y: auto; border-right: 2px solid #BAD0F7; padding: 10px; }
+.right-panel { flex: 1; padding: 20px; display: flex; flex-direction: column; }
+#selectedAlunoTitle { margin-bottom: 10px; font-weight: bold; }
+#topicsContainer { flex: 1; overflow-y: auto; border: 1px solid #ccc; padding: 10px; background: #fff; }
+.linhaTd { padding: 3px; border-left: 3px solid #BAD0F7; border-right: 3px solid #BAD0F7; margin-bottom: 2px; }
+.linhaTd:hover { background-color:#F4F4F4; cursor:pointer; }
+ul { list-style: none; margin-left: 0; padding-left: 0; }
+li { margin: 5px 0; }
+input[type="radio"] { margin-right: 10px; }
+button { margin-top: 10px; margin-right: 5px; }
+.progresso { float: right; font-weight: bold; color: #007EFF; }
+.langSwitch { font-size: 14px; cursor: pointer; }
+.langSwitch img { vertical-align: middle; margin-right: 5px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <label id="lblStudentQty">Student quantity:</label><input type="number" id="numAlunos" min="1">
+    <label id="lblNumTopics">Number of Topics:</label><input type="number" id="numTopics" min="1">
+    <label id="lblNumLevels">Number of Levels per topic:</label><input type="number" id="numLevels" min="1">
+    <button id="applyButton">Apply</button>
+    <span id="langButton" class="langSwitch">
+        <img src="https://flagcdn.com/24x18/us.png" alt="US"> English
+        <br>
+        <img src="https://flagcdn.com/24x18/br.png" alt="BR"> Português
+    </span>
+</div>
+
+<div class="container" id="mainContainer" style="display:none;">
+    <div class="left-panel">
+        <h3 id="classTitle">Test Class - Preschool</h3>
+        <div id="alunosList"></div>
+        <button id="copyTableButton">Copy all as table</button>
+    </div>
+    <div class="right-panel">
+        <div id="selectedAlunoTitle">Student:</div>
+        <div id="topicsContainer">
+            <form id="myForm">
+                <ul id="topicsList"></ul>
+                <button type="button" id="refreshButton">Refresh</button>
+                <button type="submit" id="submitButton">Submit</button>
+                <button type="button" id="copyToSpeedrunButton">Copy to speedrun</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// --- Language table ---
+const translations = {
+    en: {
+        studentQty: "Student quantity:",
+        numTopics: "Number of Topics:",
+        numLevels: "Number of Levels per topic:",
+        apply: "Apply",
+        selectStudent: "Select a student",
+        testClass: "Test Class - Preschool",
+        refresh: "Refresh",
+        submit: "Submit",
+        copySpeedrun: "Copy to speedrun",
+        copyTable: "Copy all as table",
+        fillAllFields: "Please fill all fields before continuing!",
+        copied: "Copied!"
+    },
+    pt: {
+        studentQty: "Quantidade de alunos:",
+        numTopics: "Número de tópicos:",
+        numLevels: "Número de Níveis por tópico:",
+        apply: "Aplicar",
+        selectStudent: "Selecione um aluno",
+        testClass: "Turma Teste - Educação Infantil",
+        refresh: "Reiniciar",
+        submit: "Enviar",
+        copySpeedrun: "Copiar para speedrun",
+        copyTable: "Copiar tabela completa",
+        fillAllFields: "Preencha todos os campos antes de continuar!",
+        copied: "Copiado!"
+    }
+};
+
+let currentLang = "en";
+let alunos = [];
+let alunosEstado = {};
+let alunosProgresso = {};
+let alunoSelecionado = null;
+
+function switchLang(){
+    currentLang = currentLang === "en" ? "pt" : "en";
+    document.getElementById("lblStudentQty").textContent = translations[currentLang].studentQty;
+    document.getElementById("lblNumTopics").textContent = translations[currentLang].numTopics;
+    document.getElementById("lblNumLevels").textContent = translations[currentLang].numLevels;
+    document.getElementById("applyButton").textContent = translations[currentLang].apply;
+    document.getElementById("classTitle").textContent = translations[currentLang].testClass;
+    document.getElementById("refreshButton").textContent = translations[currentLang].refresh;
+    document.getElementById("submitButton").textContent = translations[currentLang].submit;
+    document.getElementById("copyToSpeedrunButton").textContent = translations[currentLang].copySpeedrun;
+    document.getElementById("copyTableButton").textContent = translations[currentLang].copyTable;
+}
+document.getElementById("langButton").onclick = switchLang;
+
+// --- Helper para gerar nomes tipo Excel (A, B,... Z, AA, AB...) ---
+function getAlunoName(index){
+    let name = '';
+    index++;
+    while(index > 0){
+        index--;
+        name = String.fromCharCode(65 + (index % 26)) + name;
+        index = Math.floor(index/26);
+    }
+    return "Aluno " + name;
+}
+
+// --- Simulador ---
+document.getElementById("applyButton").onclick = function() {
+    const numAlunos = parseInt(document.getElementById("numAlunos").value);
+    const numTopics = parseInt(document.getElementById("numTopics").value);
+    const numLevels = parseInt(document.getElementById("numLevels").value);
+    if (!numAlunos || !numTopics || !numLevels) {
+        alert(translations[currentLang].fillAllFields);
+        return;
+    }
+    iniciarSimulador(numAlunos, numTopics, numLevels);
+};
+
+function iniciarSimulador(numAlunos, numTopics, numLevels){
+    alunos = [];
+    alunosEstado = {};
+    alunosProgresso = {};
+    alunoSelecionado = null;
+    document.getElementById("mainContainer").style.display = "flex";
+    const alunosList = document.getElementById("alunosList");
+    alunosList.innerHTML = "";
+    for(let i=0;i<numAlunos;i++){
+        const nome = getAlunoName(i);
+        alunos.push(nome);
+        alunosEstado[nome] = {};
+        alunosProgresso[nome] = 0;
+
+        const div = document.createElement("div");
+        div.className = "linhaTd";
+        div.dataset.alunoNome = nome;
+
+        const spanNome = document.createElement("span");
+        spanNome.textContent = `${i+1} - ${nome}`;
+        div.appendChild(spanNome);
+
+        const spanProg = document.createElement("span");
+        spanProg.className = "progresso";
+        spanProg.textContent = "0%";
+        div.appendChild(spanProg);
+
+        div.onclick = function(){ selecionarAluno(this.dataset.alunoNome, numTopics, numLevels); };
+        alunosList.appendChild(div);
+    }
+    document.getElementById("topicsList").innerHTML = "";
+    document.getElementById("selectedAlunoTitle").textContent = "Student:";
+}
+
+function selecionarAluno(nome, numTopics, numLevels){
+    alunoSelecionado = nome;
+    document.getElementById("selectedAlunoTitle").textContent = `Student: ${nome}`;
+    renderFormForAluno(numTopics, numLevels);
+
+    const container = document.getElementById("topicsContainer");
+    container.scrollTop = 0;
+}
+
+function renderFormForAluno(numTopics, numLevels){
+    const topicsList = document.getElementById("topicsList");
+    topicsList.innerHTML = "";
+    if(!alunoSelecionado) return;
+
+    for(let i=1;i<=numTopics;i++){
+        const topicItem = document.createElement("li");
+        topicItem.textContent = `Topic ${i}`;
+        const levelsList = document.createElement("ul");
+
+        for(let j=1;j<=numLevels;j++){
+            const levelItem = document.createElement("li");
+            const levelInput = document.createElement("input");
+            levelInput.type = "radio";
+            levelInput.name = `topic${i}`;
+            levelInput.value = `${i}.${j}`;
+
+            if(alunosEstado[alunoSelecionado][`topic${i}`] == levelInput.value){
+                levelInput.checked = true;
+            }
+
+            levelInput.onchange = function(topicName, value){
+                return function(){
+                    alunosEstado[alunoSelecionado][topicName] = value;
+                    atualizarProgresso(alunoSelecionado, numTopics);
+                }
+            }(`topic${i}`, `${i}.${j}`);
+
+            levelItem.appendChild(levelInput);
+            levelItem.appendChild(document.createTextNode(`Level ${i}.${j}`));
+            levelsList.appendChild(levelItem);
+        }
+        topicItem.appendChild(levelsList);
+        topicsList.appendChild(topicItem);
+    }
+    atualizarProgresso(alunoSelecionado, numTopics);
+}
+
+function atualizarProgresso(nome, numTopics){
+    let completados = 0;
+    for(let i=1;i<=numTopics;i++){
+        if(alunosEstado[nome][`topic${i}`]) completados++;
+    }
+    const perc = Math.round((completados/numTopics)*100);
+    alunosProgresso[nome] = perc;
+
+    const divs = document.querySelectorAll(".linhaTd");
+    divs.forEach(div => {
+        if(div.dataset.alunoNome == nome){
+            div.querySelector(".progresso").textContent = perc + "%";
+        }
+    });
+}
+
+// --- Botões ---
+document.getElementById("myForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    if(!alunoSelecionado) { alert("Select a student"); return; }
+    let text = alunoSelecionado + "\n";
+    const total = parseInt(document.getElementById("numTopics").value);
+    for(let i=1;i<=total;i++){
+        let val = alunosEstado[alunoSelecionado][`topic${i}`] || [`${i}`]+" [inactive]";
+        text += val + "\n";
+    }
+    navigator.clipboard.writeText(text).then(()=>alert("Copied!\n\n"+text));
+});
+
+document.getElementById("refreshButton").addEventListener("click", function(){
+    if(!alunoSelecionado) return;
+    const total = parseInt(document.getElementById("numTopics").value);
+    for(let i=1;i<=total;i++) alunosEstado[alunoSelecionado][`topic${i}`] = null;
+    renderFormForAluno(total, parseInt(document.getElementById("numLevels").value));
+});
+
+document.getElementById("copyToSpeedrunButton").addEventListener("click", function(){
+    if(!alunoSelecionado) { alert("Select a student"); return; }
+    let text = alunoSelecionado + "\t";
+    const total = parseInt(document.getElementById("numTopics").value);
+    for(let i=1;i<=total;i++){
+        let val = alunosEstado[alunoSelecionado][`topic${i}`];
+        text += (val ? val.split(".")[1] : "") + "\t";
+    }
+    text = text.trimEnd();
+    navigator.clipboard.writeText(text).then(()=>alert("Copied!\n\n"+text));
+});
+
+document.getElementById("copyTableButton").addEventListener("click", function(){
+    if(alunos.length === 0) return;
+    const numTopics = parseInt(document.getElementById("numTopics").value);
+    let tableText = "\t";
+    for(let i=1;i<=numTopics;i++) tableText += i + "\t";
+    tableText = tableText.trimEnd() + "\n";
+
+    alunos.forEach(nome => {
+        tableText += nome + "\t";
+        for(let i=1;i<=numTopics;i++){
+            let val = alunosEstado[nome][`topic${i}`];
+            tableText += (val ? val.split(".")[1] : "") + "\t";
+        }
+        tableText = tableText.trimEnd() + "\n";
+    });
+
+    navigator.clipboard.writeText(tableText).then(()=>alert("Copied!\n\n"+tableText));
+});
+</script>
+
+</body>
+</html>
