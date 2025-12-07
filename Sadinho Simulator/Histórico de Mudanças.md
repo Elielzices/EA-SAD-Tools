@@ -169,7 +169,7 @@ Aqui está uma linha do tempo completa das versões do projeto com detalhes das 
   - **Novidade**: Botão "Copy all as table" para exportar dados de toda a turma.
   - **Novidade**: Níveis alteráveis por tópico.
   - **Melhoria:** interface bilíngue.
-  - **LEGADO**Botões para páginas individuais (Copy to speedrun, Refresh, Submit) mantidos.
+  - **LEGADO**: Botões para páginas individuais (Copy to speedrun, Refresh, Submit) mantidos.
     - **Botão "Refresh"** para limpar todas as seleções do aluno.
     - **Botão "Copy to speedrun"** para copiar os níveis na página do aluno, separados por tabulação.
     - **Formatação de cópia**: tabulação usada para separar os subtópicos selecionados.
