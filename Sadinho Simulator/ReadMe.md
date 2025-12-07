@@ -27,6 +27,9 @@ Para testar a versão mais recente, faça o download direto:
 [Baixar Sadinho Simulator 4.0](#)  
 
 *(Substitua o `#` pelo link oficial do release)*
+=======
+[Baixar Sadinho Simulator 3170](https://github.com/Elielzices/EA-SAD-Tools/releases/download/SadinhoSimulator3170/Sadinho.simulator.3170.html)
+>>>>>>> 416d18e13262c6d32774d59978ec6305e5b1d9e6
 
 ## Instruções de uso
 
