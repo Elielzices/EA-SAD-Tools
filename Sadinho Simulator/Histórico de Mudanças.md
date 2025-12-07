@@ -2,6 +2,20 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [Sadinho Simulator 4.0] - 2025-12-07
+
+### Adicionado
+- Simulação de turmas de qualquer tamanho, com página funcional separada para cada aluno.
+- Botão "Copy all as table" para copiar os dados de toda a turma em tabela separada por tabulações.
+- Níveis alteráveis por tópico, permitindo configurar quantos níveis cada tópico terá.
+
+### Melhorias
+- Interface bilíngue (Português / Inglês) para facilitar o uso.
+
+### Alterado
+- Botões focados em apenas um aluno (Copy to speedrun, Refresh e Submit) mantidos e adaptados para trabalhar com múltiplos alunos e níveis.
+- Layout da barra superior atualizado para inserir número de alunos, tópicos e níveis diretamente na interface, substituindo prompts.
+
 ## [3170] - 2025-12-04
 
 ### Adicionado
@@ -130,7 +144,7 @@ Aqui está uma linha do tempo completa das versões do projeto com detalhes das 
 
 ---
 
-### **Versão 3170 (Atual)**
+### **Versão 3170**
 - **Data de lançamento**: quinta-feira, 4 de dezembro de 2025, 22:27
 - **Período ativa**: Atual
 - **Resumo**: Adição do **prompt para definir o número de reaches (subtópicos) por tópico**, permitindo que cada simulação tenha uma quantidade customizável de níveis por tópico.
@@ -144,6 +158,25 @@ Aqui está uma linha do tempo completa das versões do projeto com detalhes das 
     - **Fallback para tópicos inativos**: se nenhum subtópico for selecionado, o sistema marca `[inactive]`.
 
 ---
+
+### **Versão 4.0 (Sadinho Simulator 4.0) (Atual)**
+- **Data de lançamento**: domingo, 7 de dezembro de 2025, 15:36
+- **Período ativa**: Atual
+- **Resumo**: Transformação completa do simulador em uma ferramenta para turmas.
+- **Simulação**: Turmas de qualquer tamanho, cada aluno com página funcional própria, níveis alteráveis, exportação de dados da turma.
+- **Funcionalidades**:
+  - **Novidade**: Simulação de turmas de qualquer tamanho, com página funcional para cada aluno.
+  - **Novidade**: Botão "Copy all as table" para exportar dados de toda a turma.
+  - **Novidade**: Níveis alteráveis por tópico.
+  - **Melhoria:** interface bilíngue.
+  - **LEGADO**Botões para páginas individuais (Copy to speedrun, Refresh, Submit) mantidos.
+    - **Botão "Refresh"** para limpar todas as seleções do aluno.
+    - **Botão "Copy to speedrun"** para copiar os níveis na página do aluno, separados por tabulação.
+    - **Formatação de cópia**: tabulação usada para separar os subtópicos selecionados.
+
+
+---
+
 ### Resumo dos tempos de "reinado":
 1. **Versão 1.0**: 11 horas, 13 minutos e 38 segundos
 2. **Versão 2.0**: 1 hora, 57 minutos e 35 segundos
@@ -151,4 +184,5 @@ Aqui está uma linha do tempo completa das versões do projeto com detalhes das 
 4. **Versão 3155**: 1 ano, 4 meses, 3 dias, 4 horas, 22 minutos e 55 segundos
 5. **Versão 3160**: 6m 11d 16h 20min  
 6. **Versão 3165**: 7m 20d 6h 1min  
-7. **Versão 3170**: Atual
+7. **Versão 3170**: 2 dias, 17 horas e 9 minutos
+8. **Versão 4.0**: Atual
